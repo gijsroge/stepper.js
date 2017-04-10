@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tilt</title>
+    <title>Stepper.js</title>
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700" rel="stylesheet">
     <link rel="stylesheet" href="/demo/css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Extra+Condensed" rel="stylesheet">
 </head>
 <body>
 
-<input type="number" class="js-stepper">
+<div class="js-spinner">
+    <input type="number" class="js-stepper">
+    <button spinner-up>+</button>
+    <button spinner-down>-</button>
+</div>
 
 <script src="./../node_modules/jquery/dist/jquery.slim.min.js"></script>
-<script src="./../dest/stepper.js"></script>
-<script>
-    const tilt = $('.js-tilt').tilt();
-
-    $('.js-stepper').stepper();
-
-</script>
+<script src="./../src/stepper.js"></script>
 </body>
 </html>

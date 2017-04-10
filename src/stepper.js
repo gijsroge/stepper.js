@@ -1,40 +1,75 @@
 (function ($) {
     $.fn.stepper = function (options) {
 
-        const debounce = function(fun, mil){
+        /**
+         * Debounce
+         *
+         * @param fun
+         * @param mil
+         * @returns {Function}
+         */
+        const debounce = function (fun, mil) {
             let timer;
-            return function(){
+            return function () {
                 clearTimeout(timer);
-                timer = setTimeout(function(){
+                timer = setTimeout(function () {
                     fun();
                 }, mil);
             };
         };
 
         /**
-         * Init
+         * Get current value
+         *
+         * @returns {number}
          */
-        const init = function () {
-
+        const getValue = function () {
+            return $(this).val() === '' ? 0 : $(this).val();
         };
+
+        let timeout;
 
         /**
          * bindEvents
          */
         const bindEvents = function () {
-            $(this).closest('.js-spinner').find('[data-spin="up"]').on('click', () => {
-                $.fn.number.increase.call(this);
+            const spinner = $(this).closest('.js-spinner');
+
+            spinner.mousedown(function(e) {
+                clearTimeout(this.downTimer);
+                this.downTimer = setTimeout(function() {
+                    // do your thing
+                }, 2000);
+            }).mouseup(function(e) {
+                clearTimeout(this.downTimer);
             });
-            $(this).closest('.js-spinner').find('[data-spin="down"]').on('click', () => {
-                $.fn.number.decrease.call(this);
+
+            spinner.find('[spinner-up]').on('click mousedown', () => {
+                timeout = setInterval(() => {
+                    $.fn.stepper.increase.call(this);
+                    return false;
+                }, 20);
+
             });
+
+            spinner.find('[spinner-down]').on('click mousedown', () => {
+                timeout = setInterval(() => {
+                    $.fn.stepper.decrease.call(this);
+                    return false;
+                }, 20);
+            });
+
+            spinner.find('[spinner-up], [spinner-down]').on('mouseup', () => {
+                clearInterval(timeout);
+                return false;
+            })
         };
 
         /**
          * Increase
          */
-        $.fn.number.increase = function() {
-            const current = $(this).val();
+        $.fn.stepper.increase = function () {
+            let current = getValue.call(this);
             this.settings = $(this).data('settings');
             $(this).val(parseInt(current) + parseInt(this.settings.step));
             $(this).trigger('change');
@@ -43,8 +78,8 @@
         /**
          * Decrease
          */
-        $.fn.number.decrease = function() {
-            const current = $(this).val();
+        $.fn.stepper.decrease = function () {
+            let current = getValue.call(this);
             this.settings = $(this).data('settings');
             $(this).val(parseInt(current) - parseInt(this.settings.step));
             $(this).trigger('change');
@@ -70,9 +105,6 @@
             this.init = () => {
                 // Store settings
                 $(this).data('settings', this.settings);
-
-                // Prepare element
-                init.call(this);
 
                 // Bind events
                 bindEvents.call(this);
