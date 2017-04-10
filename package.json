@@ -1,0 +1,42 @@
+{
+  "name": "tilt.js",
+  "version": "1.1.17",
+  "description": "A tiny requestAnimationFrame powered 60+fps lightweight parallax tilt effect for jQuery.",
+  "main": "./src/tilt.jquery.js",
+  "scripts": {
+    "test": "node ./node_modules/jshint/bin/jshint src/tilt.jquery.js && gulp test --verbose --force"
+  },
+  "files": [
+    "*/**"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gijsroge/tilt.js.git"
+  },
+  "author": "gijsroge <rogegijs@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/gijsroge/tilt.js",
+  "devDependencies": {
+    "autoprefixer": "6.3.6",
+    "babel-preset-env": "^1.1.8",
+    "browser-sync": "2.16.0",
+    "gulp": "3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-plumber": "1.1.0",
+    "gulp-postcss": "6.1.1",
+    "gulp-sass": "2.3.1",
+    "gulp-sourcemaps": "^2.4.0",
+    "gulp-uglify": "^2.0.1",
+    "gulp-watch": "4.3.6",
+    "jshint": "^2.9.3",
+    "node-qunit-phantomjs": "^1.4.0",
+    "postcss-reporter": "1.3.3",
+    "postcss-scss": "0.1.8",
+    "qunitjs": "^2.0.1",
+    "gulp-rename": "^1.2.2",
+    "require-dir": "0.3.0"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}
