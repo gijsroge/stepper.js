@@ -1,5 +1,5 @@
 # Stepper.js
-jQuery library that aims to mimics the input[type=number] html5 functionality.
+jQuery library that adds external controls for input[type=number] so it's themeable.
 
 ### Usage
 

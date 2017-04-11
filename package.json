@@ -1,7 +1,7 @@
 {
   "name": "stepper.js",
   "version": "1.0.2",
-  "description": "jQuery library that aims to mimics the input[type=number] html5 functionality.",
+  "description": "jQuery library that adds external controls for input[type=number] so it's themeable.",
   "main": "./src/stepper.js",
   "scripts": {
     "test": "node ./node_modules/jshint/bin/jshint src/stepper.js && gulp test --verbose --force"
