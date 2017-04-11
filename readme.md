@@ -7,7 +7,7 @@ jQuery library that aims to mimics the input[type=number] html5 functionality.
 <!DOCTYPE html>
 <body>
     <div class="js-spinner">
-        <input type="number" step="1" max="10" min="0" class="js-stepper">
+        <input type="number" step="1" max="10" min="0" data-stepper-debounce="400" class="js-stepper">
         <button type="button" spinner-button="up" title="add 1">+</button>
         <button type="button" spinner-button="down" title="subtract 1">-</button>
     </div>
@@ -18,6 +18,7 @@ jQuery library that aims to mimics the input[type=number] html5 functionality.
 ```
 
 ### Options
+All options can be added inline as attributes on the <input> element. See the example above.
 ```js
 step:       "1",        // Amount to increment on each step. Also accepts decimals.
 min:        "1000",     // Min amount
