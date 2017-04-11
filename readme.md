@@ -7,9 +7,9 @@ jQuery library that aims to mimics the input[type=number] html5 functionality.
 <!DOCTYPE html>
 <body>
     <div class="js-spinner">
-        <input type="number" step="1" max="13" min="0" class="js-stepper">
-        <button spinner-button="up">+</button>
-        <button spinner-button="down">-</button>
+        <input type="number" step="1" max="10" min="0" class="js-stepper">
+        <button type="button" spinner-button="up" title="add 1">+</button>
+        <button type="button" spinner-button="down" title="subtract 1">-</button>
     </div>
 
     <script src="jquery.js"></script>
