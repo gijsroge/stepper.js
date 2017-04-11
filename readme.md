@@ -34,4 +34,4 @@ debounce:   400,        // Time in milliseconds to debounce the change event
 - https://unpkg.com/stepper.js@1.0.2/dest/stepper.min.js
 
 ### Alternatives
-- **https://github.com/vsn4ik/jquery.spinner
+- https://github.com/vsn4ik/jquery.spinner
