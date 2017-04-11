@@ -1,21 +1,21 @@
 {
-  "name": "tilt.js",
-  "version": "1.1.17",
-  "description": "A tiny requestAnimationFrame powered 60+fps lightweight parallax tilt effect for jQuery.",
-  "main": "./src/tilt.jquery.js",
+  "name": "Stepper.js",
+  "version": "1.0.0",
+  "description": "jQuery library that mimicks the input[type=number] stepper functionality.",
+  "main": "./src/stepper.js",
   "scripts": {
-    "test": "node ./node_modules/jshint/bin/jshint src/tilt.jquery.js && gulp test --verbose --force"
+    "test": "node ./node_modules/jshint/bin/jshint src/stepper.js && gulp test --verbose --force"
   },
   "files": [
     "*/**"
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:gijsroge/tilt.js.git"
+    "url": "git@github.com:gijsroge/stepper.js.git"
   },
   "author": "gijsroge <rogegijs@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/gijsroge/tilt.js",
+  "homepage": "https://github.com/gijsroge/stepper.js",
   "devDependencies": {
     "autoprefixer": "6.3.6",
     "babel-preset-env": "^1.1.8",

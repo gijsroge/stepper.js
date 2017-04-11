@@ -1,12 +1,13 @@
+'use strict';
+
 /*jshint esversion: 6 */
 (function ($) {
 
     "use strict";
 
-
     $.fn.stepper = function (options) {
 
-        let timeout;
+        var timeout = void 0;
 
         /**
          * Debounce
@@ -18,21 +19,21 @@
          *
          * Source: https://davidwalsh.name/javascript-debounce-function
          */
-        const debounce = function (func, wait, immediate) {
-            let timeout;
+        var debounce = function debounce(func, wait, immediate) {
+            var timeout = void 0;
             return function () {
-                let context = this, args = arguments;
-                let later = function () {
+                var context = this,
+                    args = arguments;
+                var later = function later() {
                     timeout = null;
                     if (!immediate) func.apply(context, args);
                 };
-                let callNow = immediate && !timeout;
+                var callNow = immediate && !timeout;
                 clearTimeout(timeout);
                 timeout = setTimeout(later, wait);
                 if (callNow) func.apply(context, args);
             };
         };
-
 
         /**
          * Find the amount of decimals in a number
@@ -42,7 +43,7 @@
          *
          * Source: http://stackoverflow.com/a/10454534
          */
-        const findDecimals = function(num) {
+        var findDecimals = function findDecimals(num) {
             return (num.split('.')[1] || []).length;
         };
 
@@ -51,39 +52,41 @@
          *
          * @returns {number}
          */
-        const getValue = function () {
+        var getValue = function getValue() {
             return $(this).val() === '' ? 0 : $(this).val();
         };
 
         /**
          * bindEvents
          */
-        const bindEvents = function () {
-            const spinner = $(this).closest('.js-spinner');
+        var bindEvents = function bindEvents() {
+            var spinner = $(this).closest('.js-spinner');
             var _this = this;
 
             spinner.find('[spinner-button]').on({
-                click: function() {
-                    const type = $(this).attr('spinner-button');
-                    if (type === 'up'){
+                click: function click() {
+                    var type = $(this).attr('spinner-button');
+                    if (type === 'up') {
                         $.fn.stepper.increase.call(_this);
-                    }else{
+                    } else {
                         $.fn.stepper.decrease.call(_this);
                     }
                 },
-                mousedown: function(){
-                    $(this).data('timer', setTimeout(() => {
-                        timeout = setInterval(() => {
-                            const type = $(this).attr('spinner-button');
-                            if (type === 'up'){
+                mousedown: function mousedown() {
+                    var _this2 = this;
+
+                    $(this).data('timer', setTimeout(function () {
+                        timeout = setInterval(function () {
+                            var type = $(_this2).attr('spinner-button');
+                            if (type === 'up') {
                                 $.fn.stepper.increase.call(_this);
-                            }else{
+                            } else {
                                 $.fn.stepper.decrease.call(_this);
                             }
                         }, 60);
                     }, _this.settings.debounce));
                 },
-                mouseup: function() {
+                mouseup: function mouseup() {
                     clearTimeout($(this).data('timer'));
                 }
             });
@@ -97,10 +100,10 @@
          * Increase
          */
         $.fn.stepper.increase = function () {
-            let current = parseFloat(getValue.call(this));
+            var current = parseFloat(getValue.call(this));
             this.settings = $(this).data('settings');
-            const decimals = findDecimals(this.settings.step);
-            const newValue = (current + parseFloat(this.settings.step)).toFixed(decimals);
+            var decimals = findDecimals(this.settings.step);
+            var newValue = (current + parseFloat(this.settings.step)).toFixed(decimals);
             updateValue.call(this, newValue);
         };
 
@@ -108,10 +111,10 @@
          * Decrease
          */
         $.fn.stepper.decrease = function () {
-            let current = parseFloat(getValue.call(this));
+            var current = parseFloat(getValue.call(this));
             this.settings = $(this).data('settings');
-            const decimals = findDecimals(this.settings.step);
-            const newValue = (current - parseFloat(this.settings.step)).toFixed(decimals);
+            var decimals = findDecimals(this.settings.step);
+            var newValue = (current - parseFloat(this.settings.step)).toFixed(decimals);
             updateValue.call(this, newValue);
         };
 
@@ -119,7 +122,7 @@
          * Update stepper element
          * @param newValue
          */
-        const updateValue = function (newValue) {
+        var updateValue = function updateValue(newValue) {
             if ((newValue <= this.settings.max || typeof this.settings.max === "undefined") && (newValue >= this.settings.min || typeof this.settings.min === "undefined")) {
                 $(this).val(newValue).focus();
                 triggerChange.call(this);
@@ -131,7 +134,7 @@
          *
          * @type {Function}
          */
-        const triggerChange = debounce(function () {
+        var triggerChange = debounce(function () {
             $(this).trigger('change');
         }, 400);
 
@@ -139,6 +142,7 @@
          * Loop every instance
          */
         return this.each(function () {
+            var _this3 = this;
 
             /**
              * Default settings merged with user settings
@@ -149,21 +153,19 @@
                 step: $(this).is('[step]') ? $(this).attr('step') : 1,
                 min: $(this).is('[min]') ? parseFloat($(this).attr('min')) : undefined,
                 max: $(this).is('[max]') ? parseFloat($(this).attr('max')) : undefined,
-                debounce: $(this).is('[data-stepper-debounce]') ? parseInt($(this).attr('data-stepper-debounce')) : 400,
+                debounce: $(this).is('[data-stepper-debounce]') ? parseInt($(this).attr('data-stepper-debounce')) : 400
             }, options);
 
-
-            this.init = () => {
+            this.init = function () {
                 // Store settings
-                $(this).data('settings', this.settings);
+                $(_this3).data('settings', _this3.settings);
 
                 // Bind events
-                bindEvents.call(this);
+                bindEvents.call(_this3);
             };
 
             // Init
             this.init();
-
         });
     };
 
@@ -171,5 +173,5 @@
      * Auto load
      */
     $('input[type="number"]').stepper();
-
-}(jQuery));
+})(jQuery);
+//# sourceMappingURL=stepper.js.map
