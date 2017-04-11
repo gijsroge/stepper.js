@@ -22,7 +22,7 @@ jQuery library that aims to mimics the input[type=number] html5 functionality.
 step:       "1",        // Amount to increment on each step. Also accepts decimals.
 min:        "1000",     // Min amount
 max:        "10",       // Max amount
-debounce:   "400",      // Time in milliseconds to debounce the change event
+debounce:   400,        // Time in milliseconds to debounce the change event
 ```
 
 ### Install
