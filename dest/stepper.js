@@ -150,7 +150,7 @@
              * @type {*}
              */
             this.settings = $.extend({
-                step: $(this).is('[step]') ? $(this).attr('step') : 1,
+                step: $(this).is('[step]') ? $(this).attr('step') : '1',
                 min: $(this).is('[min]') ? parseFloat($(this).attr('min')) : undefined,
                 max: $(this).is('[max]') ? parseFloat($(this).attr('max')) : undefined,
                 debounce: $(this).is('[data-stepper-debounce]') ? parseInt($(this).attr('data-stepper-debounce')) : 400
