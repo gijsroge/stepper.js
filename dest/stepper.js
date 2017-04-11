@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /*jshint esversion: 6 */
 (function ($) {
@@ -36,6 +36,20 @@
         };
 
         /**
+         * Check if its a touch base device
+         *
+         * @returns {boolean}
+         */
+        var is_touch_device = function is_touch_device() {
+            try {
+                document.createEvent("TouchEvent");
+                return true;
+            } catch (e) {
+                return false;
+            }
+        };
+
+        /**
          * Find the amount of decimals in a number
          *
          * @param num
@@ -61,34 +75,29 @@
          */
         var bindEvents = function bindEvents() {
             var spinner = $(this).closest('.js-spinner');
+            var events = is_touch_device() ? 'touchstart' : 'mousedown';
             var _this = this;
 
-            spinner.find('[spinner-button]').on({
-                click: function click() {
-                    var type = $(this).attr('spinner-button');
-                    if (type === 'up') {
-                        $.fn.stepper.increase.call(_this);
-                    } else {
-                        $.fn.stepper.decrease.call(_this);
-                    }
-                },
-                mousedown: function mousedown() {
-                    var _this2 = this;
-
-                    $(this).data('timer', setTimeout(function () {
-                        timeout = setInterval(function () {
-                            var type = $(_this2).attr('spinner-button');
-                            if (type === 'up') {
-                                $.fn.stepper.increase.call(_this);
-                            } else {
-                                $.fn.stepper.decrease.call(_this);
-                            }
-                        }, 60);
-                    }, _this.settings.debounce));
-                },
-                mouseup: function mouseup() {
-                    clearTimeout($(this).data('timer'));
+            spinner.find('[spinner-button]').on(events, function () {
+                var type = $(this).attr('spinner-button');
+                if (type === 'up') {
+                    $.fn.stepper.increase.call(_this);
+                } else {
+                    $.fn.stepper.decrease.call(_this);
                 }
+            }).on('mousedown', function () {
+                var type = $(this).attr('spinner-button');
+                $(this).data('timer', setTimeout(function () {
+                    timeout = setInterval(function () {
+                        if (type === 'up') {
+                            $.fn.stepper.increase.call(_this);
+                        } else {
+                            $.fn.stepper.decrease.call(_this);
+                        }
+                    }, 60);
+                }, _this.settings.debounce));
+            }).on('mouseup', function () {
+                clearTimeout($(this).data('timer'));
             });
 
             $(document).mouseup(function () {
@@ -124,7 +133,11 @@
          */
         var updateValue = function updateValue(newValue) {
             if ((newValue <= this.settings.max || typeof this.settings.max === "undefined") && (newValue >= this.settings.min || typeof this.settings.min === "undefined")) {
-                $(this).val(newValue).focus();
+                if (!is_touch_device()) {
+                    $(this).val(newValue).focus();
+                } else {
+                    $(this).val(newValue);
+                }
                 triggerChange.call(this);
             }
         };
@@ -142,7 +155,7 @@
          * Loop every instance
          */
         return this.each(function () {
-            var _this3 = this;
+            var _this2 = this;
 
             /**
              * Default settings merged with user settings
@@ -158,10 +171,10 @@
 
             this.init = function () {
                 // Store settings
-                $(_this3).data('settings', _this3.settings);
+                $(_this2).data('settings', _this2.settings);
 
                 // Bind events
-                bindEvents.call(_this3);
+                bindEvents.call(_this2);
             };
 
             // Init

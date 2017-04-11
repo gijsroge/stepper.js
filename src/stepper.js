@@ -33,6 +33,20 @@
             };
         };
 
+        /**
+         * Check if its a touch base device
+         *
+         * @returns {boolean}
+         */
+        const is_touch_device = function() {
+            try {
+                document.createEvent("TouchEvent");
+                return true;
+            } catch (e) {
+                return false;
+            }
+        };
+
 
         /**
          * Find the amount of decimals in a number
@@ -42,7 +56,7 @@
          *
          * Source: http://stackoverflow.com/a/10454534
          */
-        const findDecimals = function(num) {
+        const findDecimals = function (num) {
             return (num.split('.')[1] || []).length;
         };
 
@@ -60,33 +74,33 @@
          */
         const bindEvents = function () {
             const spinner = $(this).closest('.js-spinner');
+            const events = is_touch_device() ? 'touchstart' : 'mousedown';
             var _this = this;
 
-            spinner.find('[spinner-button]').on({
-                click: function() {
+            spinner.find('[spinner-button]')
+                .on(events, function () {
                     const type = $(this).attr('spinner-button');
-                    if (type === 'up'){
+                    if (type === 'up') {
                         $.fn.stepper.increase.call(_this);
-                    }else{
+                    } else {
                         $.fn.stepper.decrease.call(_this);
                     }
-                },
-                mousedown: function(){
+                })
+                .on('mousedown', function () {
+                    const type = $(this).attr('spinner-button');
                     $(this).data('timer', setTimeout(() => {
                         timeout = setInterval(() => {
-                            const type = $(this).attr('spinner-button');
-                            if (type === 'up'){
+                            if (type === 'up') {
                                 $.fn.stepper.increase.call(_this);
-                            }else{
+                            } else {
                                 $.fn.stepper.decrease.call(_this);
                             }
                         }, 60);
                     }, _this.settings.debounce));
-                },
-                mouseup: function() {
+                })
+                .on('mouseup', function () {
                     clearTimeout($(this).data('timer'));
-                }
-            });
+                });
 
             $(document).mouseup(function () {
                 clearInterval(timeout);
@@ -121,7 +135,11 @@
          */
         const updateValue = function (newValue) {
             if ((newValue <= this.settings.max || typeof this.settings.max === "undefined") && (newValue >= this.settings.min || typeof this.settings.min === "undefined")) {
-                $(this).val(newValue).focus();
+                if(!is_touch_device()){
+                    $(this).val(newValue).focus();
+                }else{
+                    $(this).val(newValue);
+                }
                 triggerChange.call(this);
             }
         };
