@@ -28,8 +28,8 @@ gulp.task("transpile", function () {
 });
 
 gulp.task('compress', function (cb) {
-    return gulp.src(config.js.dest + 'tilt.jquery.js')
+    return gulp.src(config.js.dest + 'stepper.js')
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
-        .pipe(gulp.dest(config.js.dest))
+        .pipe(gulp.dest(config.js.dest));
 });
