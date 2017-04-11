@@ -1,6 +1,6 @@
 {
   "name": "stepper.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "jQuery library that mimicks the input[type=number] stepper functionality.",
   "main": "./src/stepper.js",
   "scripts": {
