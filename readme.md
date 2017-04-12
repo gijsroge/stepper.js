@@ -1,8 +1,10 @@
 # Stepper.js
-jQuery library that adds external controls for input[type=number] so it's themeable.
+Themeable stepper control buttons that sit on top of a native input[type="number"] element to preserve all browser specific UX enhancements that the input[type=number] provides.
+
+Setting [options](https://github.com/gijsroge/stepper.js#options) is as simple as using the native **step, min, max** attributes.
 
 ### Demo
-[Codepen demo](http://codepen.io/gijs/full/XRWKQW/)
+**[Codepen demo](http://codepen.io/gijs/full/XRWKQW/)**
 
 ### Usage
 
