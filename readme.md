@@ -34,7 +34,7 @@ debounce:   400,        // Time in milliseconds to debounce the change event
 - **npm:** `npm install --save stepper.js`
 
 ### CDN
-- https://unpkg.com/stepper.js@1.0.2/dest/stepper.min.js
+- https://unpkg.com/stepper.js@1.0.3/dest/stepper.min.js
 
 ### Alternatives
 - https://github.com/vsn4ik/jquery.spinner
