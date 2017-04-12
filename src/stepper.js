@@ -115,7 +115,8 @@
             this.settings = $(this).data('settings');
             const decimals = findDecimals(this.settings.step);
             const newValue = (current + parseFloat(this.settings.step)).toFixed(decimals);
-            updateValue.call(this, newValue);
+            const currentValue = $(this).val();
+            updateValue.call(this, newValue, currentValue);
         };
 
         /**
@@ -126,14 +127,16 @@
             this.settings = $(this).data('settings');
             const decimals = findDecimals(this.settings.step);
             const newValue = (current - parseFloat(this.settings.step)).toFixed(decimals);
-            updateValue.call(this, newValue);
+            const currentValue = $(this).val();
+            updateValue.call(this, newValue, currentValue);
         };
 
         /**
          * Update stepper element
          * @param newValue
+         * @param currentValue
          */
-        const updateValue = function (newValue) {
+        const updateValue = function (newValue, currentValue) {
             if ((newValue <= this.settings.max || typeof this.settings.max === "undefined") && (newValue >= this.settings.min || typeof this.settings.min === "undefined")) {
                 if(!is_touch_device()){
                     $(this).val(newValue).focus();
@@ -141,6 +144,10 @@
                     $(this).val(newValue);
                 }
                 triggerChange.call(this);
+            }else if(currentValue > this.settings.max){
+                $(this).val(this.settings.max);
+            }else if(currentValue < this.settings.min){
+                $(this).val(this.settings.min);
             }
         };
 
