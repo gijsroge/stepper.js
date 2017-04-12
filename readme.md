@@ -1,6 +1,9 @@
 # Stepper.js
 jQuery library that adds external controls for input[type=number] so it's themeable.
 
+### Demo
+[Codepen demo](http://codepen.io/gijs/full/XRWKQW/)
+
 ### Usage
 
 ```html
