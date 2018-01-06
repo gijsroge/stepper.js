@@ -77,9 +77,9 @@
             const events = is_touch_device() ? 'touchstart' : 'mousedown';
             var _this = this;
 
-            spinner.find('[spinner-button]')
+            spinner.find('[data-spinner-button]')
                 .on(events, function () {
-                    const type = $(this).attr('spinner-button');
+                    const type = $(this).attr('data-spinner-button');
                     if (type === 'up') {
                         $.fn.stepper.increase.call(_this);
                     } else {
@@ -87,7 +87,7 @@
                     }
                 })
                 .on('mousedown', function () {
-                    const type = $(this).attr('spinner-button');
+                    const type = $(this).attr('data-spinner-button');
                     $(this).data('timer', setTimeout(() => {
                         timeout = setInterval(() => {
                             if (type === 'up') {

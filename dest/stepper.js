@@ -78,15 +78,15 @@
             var events = is_touch_device() ? 'touchstart' : 'mousedown';
             var _this = this;
 
-            spinner.find('[spinner-button]').on(events, function () {
-                var type = $(this).attr('spinner-button');
+            spinner.find('[data-spinner-button]').on(events, function () {
+                var type = $(this).attr('data-spinner-button');
                 if (type === 'up') {
                     $.fn.stepper.increase.call(_this);
                 } else {
                     $.fn.stepper.decrease.call(_this);
                 }
             }).on('mousedown', function () {
-                var type = $(this).attr('spinner-button');
+                var type = $(this).attr('data-spinner-button');
                 $(this).data('timer', setTimeout(function () {
                     timeout = setInterval(function () {
                         if (type === 'up') {
