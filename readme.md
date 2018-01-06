@@ -13,8 +13,8 @@ Setting [options](https://github.com/gijsroge/stepper.js#options) is as simple a
 <body>
     <div class="js-spinner">
         <input type="number" step="1" max="10" min="0" data-stepper-debounce="400" class="js-stepper">
-        <button type="button" spinner-button="up" title="add 1" tabindex="-1">+</button>
-        <button type="button" spinner-button="down" title="subtract 1" tabindex="-1">-</button>
+        <button type="button" data-spinner-button="up" title="add 1" tabindex="-1">+</button>
+        <button type="button" data-spinner-button="down" title="subtract 1" tabindex="-1">-</button>
     </div>
 
     <script src="jquery.js"></script>
